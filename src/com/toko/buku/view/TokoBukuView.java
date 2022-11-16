@@ -5,17 +5,21 @@
  */
 package com.toko.buku.view;
 
+import com.toko.buku.controller.TokoBukuController;
+
 /**
  *
  * @author ASUS
  */
-public class TokoBuku extends javax.swing.JFrame {
+public class TokoBukuView extends javax.swing.JFrame {
+    public final TokoBukuController tokoBukuController = new TokoBukuController(this);
 
     /**
      * Creates new form TokoBuku
      */
-    public TokoBuku() {
+    public TokoBukuView() {
         initComponents();
+        tokoBukuController.getAllData();
     }
 
     /**
@@ -36,10 +40,10 @@ public class TokoBuku extends javax.swing.JFrame {
         txtNama = new javax.swing.JTextField();
         txtHarga = new javax.swing.JTextField();
         txtStock = new javax.swing.JTextField();
-        btn_Save = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
+        btn_delete = new javax.swing.JButton();
+        btn_update = new javax.swing.JButton();
+        btn_clear = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblBuku = new javax.swing.JTable();
 
@@ -63,18 +67,49 @@ public class TokoBuku extends javax.swing.JFrame {
             }
         });
 
-        btn_Save.setText("Save");
-
-        jButton2.setText("Delete");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        txtNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                txtNamaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Update");
+        btn_save.setText("Save");
+        btn_save.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_saveMouseClicked(evt);
+            }
+        });
 
-        jButton4.setText("Clear");
+        btn_delete.setText("Delete");
+        btn_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_deleteMouseClicked(evt);
+            }
+        });
+        btn_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_deleteActionPerformed(evt);
+            }
+        });
+
+        btn_update.setText("Update");
+        btn_update.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_updateMouseClicked(evt);
+            }
+        });
+
+        btn_clear.setText("Clear");
+        btn_clear.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_clearMouseClicked(evt);
+            }
+        });
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         tblBuku.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,6 +122,11 @@ public class TokoBuku extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblBuku.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblBukuMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblBuku);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,12 +151,12 @@ public class TokoBuku extends javax.swing.JFrame {
                             .addComponent(txtStock, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3))
+                            .addComponent(btn_save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_update))
                         .addGap(110, 110, 110)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))))
+                            .addComponent(btn_clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_delete, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -146,12 +186,12 @@ public class TokoBuku extends javax.swing.JFrame {
                             .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_Save)
-                            .addComponent(jButton2))
+                            .addComponent(btn_save)
+                            .addComponent(btn_delete))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3)
-                            .addComponent(jButton4)))
+                            .addComponent(btn_update)
+                            .addComponent(btn_clear)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
@@ -163,9 +203,42 @@ public class TokoBuku extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtKodeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_deleteActionPerformed
+
+    private void btn_saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_saveMouseClicked
+        // TODO add your handling code here:
+        tokoBukuController.saveBuku();
+    }//GEN-LAST:event_btn_saveMouseClicked
+
+    private void btn_updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_updateMouseClicked
+        // TODO add your handling code here:
+        tokoBukuController.updateBuku();
+    }//GEN-LAST:event_btn_updateMouseClicked
+
+    private void btn_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_deleteMouseClicked
+        // TODO add your handling code here:
+        tokoBukuController.deleteBuku();
+    }//GEN-LAST:event_btn_deleteMouseClicked
+
+    private void btn_clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clearMouseClicked
+        // TODO add your handling code here:
+        tokoBukuController.clear();
+    }//GEN-LAST:event_btn_clearMouseClicked
+
+    private void tblBukuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblBukuMouseClicked
+        // TODO add your handling code here:
+        tokoBukuController.getdata();
+    }//GEN-LAST:event_tblBukuMouseClicked
+
+    private void txtNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNamaActionPerformed
+
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,29 +257,30 @@ public class TokoBuku extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TokoBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TokoBukuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TokoBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TokoBukuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TokoBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TokoBukuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TokoBuku.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TokoBukuView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TokoBuku().setVisible(true);
+                new TokoBukuView().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Save;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_delete;
+    private javax.swing.JButton btn_save;
+    private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -219,4 +293,39 @@ public class TokoBuku extends javax.swing.JFrame {
     private javax.swing.JTextField txtNama;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the tblBuku
+     */
+    public javax.swing.JTable getTblBuku() {
+        return tblBuku;
+    }
+
+    /**
+     * @return the txtHarga
+     */
+    public javax.swing.JTextField getTxtHarga() {
+        return txtHarga;
+    }
+
+    /**
+     * @return the txtKode
+     */
+    public javax.swing.JTextField getTxtKode() {
+        return txtKode;
+    }
+
+    /**
+     * @return the txtNama
+     */
+    public javax.swing.JTextField getTxtNama() {
+        return txtNama;
+    }
+
+    /**
+     * @return the txtStock
+     */
+    public javax.swing.JTextField getTxtStock() {
+        return txtStock;
+    }
 }

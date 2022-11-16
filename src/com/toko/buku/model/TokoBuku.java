@@ -15,7 +15,7 @@ public class TokoBuku implements Serializable {
     @Column(name = "nama", length = 25)
     private String nama;
     @Column(name = "harga", length = 15)
-    private String harga;
+    private int harga;
     @Column(name = "stock", length = 15)
     private String stock;
 
@@ -35,14 +35,6 @@ public class TokoBuku implements Serializable {
         this.nama = nama;
     }
 
-    public String getHarga() {
-        return harga;
-    }
-
-    public void setHarga(String harga) {
-        this.harga = harga;
-    }
-
     public String getStock() {
         return stock;
     }
@@ -50,5 +42,14 @@ public class TokoBuku implements Serializable {
     public void setStock(String stock) {
         this.stock = stock;
     }
+
+    public int getHarga() {
+        return harga;
+    }
+
+    public void setHarga(int harga) {
+        this.harga = harga;
+    }
+    
     
 }
