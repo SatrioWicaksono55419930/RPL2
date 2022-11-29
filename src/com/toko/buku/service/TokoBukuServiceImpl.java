@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author ASUS
  */
 @Service("TokoBukuService")
-@Transactional(readOnly = true)
+@Transactional
 public class TokoBukuServiceImpl implements TokoBukuService {
     @Autowired
     private TokoBukuDao tokoBukuDao;
